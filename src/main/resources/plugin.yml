@@ -1,0 +1,15 @@
+name: VintageSurvival
+version: '${version}'
+main: me.bially.vintagesurvival.VintageSurvival
+api-version: 1.20
+softdepend: [Oraxen, RealisticSeasons, PlaceholderAPI]
+authors: [Bially]
+description: tu bedzie opis xD
+commands:
+  makro:
+    description: Pokazuje stan makroskladnikow.
+    usage: /<command>
+    permission: vs.makro
+  craftcrafting:
+    description: Craft crafting special.
+    usage: /<command>

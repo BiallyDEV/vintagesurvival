@@ -41,16 +41,16 @@ public class PlaceholderAPI extends PlaceholderExpansion {
     @Override
     public @Nullable String onPlaceholderRequest(Player player, @NotNull String params) {
 
-        if (player == null) {
-            return "";
-        }
-        if (params.equals("carbslvl")) {
-            for (UUID uuid : playerNutritions.keySet()) {
-                NutritionData data = playerNutritions.get(uuid);
-                return String.valueOf(data.getCarbs());
-            }
-        }
+        if (player == null) return "";
 
-            return null;
+        NutritionData data = playerNutritions.get(player.getUniqueId());
+        return switch (params) {
+            case "protein" -> String.valueOf(data.getProtein());
+            case "carbs" -> String.valueOf(data.getCarbs());
+            case "fat" -> String.valueOf(data.getFat());
+            case "vitamins" -> String.valueOf(data.getVitamins());
+            default -> "";
+        };
+
     }
 }

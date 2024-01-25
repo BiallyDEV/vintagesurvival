@@ -11,6 +11,7 @@ import me.bially.vintagesurvival.tools.ToolsDurability;
 import me.bially.vintagesurvival.utils.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ public final class VintageSurvival extends JavaPlugin {
     }
 
     private void enable() {
-        if (Bukkit.getPluginManager().isPluginEnabled("Oraxen")) {
+        PluginManager pluginManager = Bukkit.getPluginManager();
+        if (pluginManager.isPluginEnabled("Oraxen")) {
             Bukkit.getScheduler().runTaskLater(this, () -> {
                 loadConfig();
                 VSCommands commands = new VSCommands(this);
@@ -42,7 +44,8 @@ public final class VintageSurvival extends JavaPlugin {
                 getCommand("craftcrafting").setExecutor(commands);
                 nutritionManager.loadTimers();
                 loadPlayers();
-                new PlaceholderAPI().register();
+                if (pluginManager.isPluginEnabled("PlaceholderAPI"))
+                    new PlaceholderAPI().register();
 
                 getServer().getPluginManager().registerEvents(new NutritionEvents(this),this);
                 Bukkit.getPluginManager().registerEvents(new Firewood(), this);

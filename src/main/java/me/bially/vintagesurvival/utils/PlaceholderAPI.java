@@ -1,6 +1,8 @@
 package me.bially.vintagesurvival.utils;
 
+import me.bially.vintagesurvival.VintageSurvival;
 import me.bially.vintagesurvival.nutrition.NutritionData;
+import me.bially.vintagesurvival.nutrition.NutritionManager;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +14,6 @@ import java.util.UUID;
 
 public class PlaceholderAPI extends PlaceholderExpansion {
 
-    private HashMap<UUID,NutritionData> playerNutritions = new HashMap<>();
     @Override
     public @NotNull String getIdentifier() {
         return "vintagesurvival";
@@ -43,7 +44,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
 
         if (player == null) return "";
 
-        NutritionData data = playerNutritions.get(player.getUniqueId());
+        NutritionData data = VintageSurvival.getInstance().nutritionManager.getNutrition(player.getUniqueId());
         return switch (params) {
             case "protein" -> String.valueOf(data.getProtein());
             case "carbs" -> String.valueOf(data.getCarbs());
